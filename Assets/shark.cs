@@ -40,14 +40,14 @@ public class shark : MonoBehaviour {
             }
         }
 
-        Debug.Log(Vector3.Distance(transform.position, GameObject.Find("Player").GetComponent<Transform>().position));
+       // Debug.Log(Vector3.Distance(transform.position, GameObject.Find("Player").GetComponent<Transform>().position));
 
-        if (Vector3.Distance(transform.position, GameObject.Find("Player").GetComponent<Transform>().position) < 7)
+        if (Vector3.Distance(transform.position, GameObject.Find("Player").GetComponent<Transform>().position) < 4)
         {
             SetState(states.shark01);
         }
 
-        if (Vector3.Distance(transform.position, GameObject.Find("Player").GetComponent<Transform>().position) > 7)
+        if (Vector3.Distance(transform.position, GameObject.Find("Player").GetComponent<Transform>().position) > 4)
         {
             SetState(states.shark02anim);
         }
@@ -63,7 +63,10 @@ public class shark : MonoBehaviour {
             recharge = 100;
             transform.position+=new Vector3(-.1f,-.1f,0);
             Instantiate(blood,new Vector3(transform.position.x + .1f, transform.position.y, 0), Quaternion.identity);
+            transform.position -= new Vector3(Random.Range(-.1f, .1f), Random.Range(-.1f, .1f), 0);
         }
+
+
 
     }
 
