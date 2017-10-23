@@ -8,7 +8,7 @@ public class bubblle : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-        life = 100;
+       // life = 100;
 	}
 	
 	// Update is called once per frame

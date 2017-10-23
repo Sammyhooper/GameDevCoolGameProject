@@ -139,7 +139,7 @@ public class bear : MonoBehaviour {
 
     private void OnCollisionEnter2D(Collision2D coll)
     {
-        if (coll.gameObject.name == "Bubble(Clone)")
+        if (coll.gameObject.name == "shuriken01(Clone)")
         {
             moving = false;
             health -= 5;

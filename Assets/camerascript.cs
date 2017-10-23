@@ -4,11 +4,13 @@ using UnityEngine;
 
 public class camerascript : MonoBehaviour {
 
-    
+   
     
 	// Use this for initialization
 	void Start () {
         //trans = new vector3(GameObject.Find("Player").GetComponent<Transform>().position);
+
+
 
     }
 	
