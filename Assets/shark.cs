@@ -12,10 +12,12 @@ public class shark : MonoBehaviour {
     public Animator A;
     public Transform blood;
     public Transform water;
+    public Transform explosion;
+    public Transform firebreath;
 
     // Use this for initialization
     void Start () {
-        health = 100;
+     
         //SetState(states.shark02anim);
 	}
 	
@@ -26,30 +28,16 @@ public class shark : MonoBehaviour {
         Instantiate(water, new Vector3(transform.position.x, transform.position.y, 0), Quaternion.identity);
         if (moving == true)
         {
-            transform.position = Vector3.Slerp(transform.position, GameObject.Find("Player").GetComponent<Transform>().position, Random.Range(.01f,.07f));
+            transform.position = Vector3.Slerp(transform.position, GameObject.Find("Player").GetComponent<Transform>().position, .1f);
+            transform.position = new Vector3(transform.position.x, transform.position.y, 0);
         }
 
         if (health <= 0)
         {
             Destroy(gameObject);
+            Instantiate(explosion, transform.position, Quaternion.identity); 
         }
 
-
-        if (moving == false)
-        {
-           transform.position -= Vector3.Slerp(transform.position, GameObject.Find("Player").GetComponent<Transform>().position, Random.Range(.01f, .07f));
-
-            recharge -= 1;
-            if (recharge <= 0)
-            {
-                moving = true;
-            }
-        }
-
-        if (recharge == 0)
-            {
-                recharge = 100;
-            }
 
 
 
@@ -59,19 +47,19 @@ public class shark : MonoBehaviour {
        // Debug.Log(moving);
         // Debug.Log(Vector3.Distance(transform.position, GameObject.Find("Player").GetComponent<Transform>().position));
 
-        if (Vector3.Distance(transform.position, GameObject.Find("Player").GetComponent<Transform>().position) < 4)
+        if (Vector3.Distance(transform.position, GameObject.Find("Player").GetComponent<Transform>().position) < .2f)
         {
             SetState(states.shark01);
 
         }
-        if (Vector3.Distance(transform.position, GameObject.Find("Player").GetComponent<Transform>().position) < 4)
+        if (Vector3.Distance(transform.position, GameObject.Find("Player").GetComponent<Transform>().position) < .2f)
         {
             transform.position -= Vector3.Slerp(transform.position, GameObject.Find("Player").GetComponent<Transform>().position, Random.Range(.01f, .07f));
 
         }
 
 
-        if (Vector3.Distance(transform.position, GameObject.Find("Player").GetComponent<Transform>().position) > 4)
+        if (Vector3.Distance(transform.position, GameObject.Find("Player").GetComponent<Transform>().position) > .2f)
         {
             SetState(states.shark02anim);
         }
@@ -82,11 +70,16 @@ public class shark : MonoBehaviour {
     {
         if (coll.gameObject.name == "shuriken01(Clone)")
         {
-            moving = false;
+           // moving = false;
             health -= 5;
             recharge = Random.Range(10,50);
-            transform.position+=new Vector3(-.1f,-.1f,0);
-            Instantiate(blood,new Vector3(transform.position.x + .1f, transform.position.y, 0), Quaternion.identity);
+           // transform.position+=new Vector3(-.1f,-.1f,0);
+            Instantiate(blood,new Vector3(transform.position.x + .01f, transform.position.y, 0), Quaternion.identity);
+            if (recharge >= 30)
+            {
+                Instantiate(firebreath, transform.position, Quaternion.identity);
+                
+            }
           //  transform.position -= new Vector3(Random.Range(-.1f, .1f), Random.Range(-.1f, .1f), 0);
         }
 

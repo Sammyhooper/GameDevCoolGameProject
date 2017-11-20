@@ -9,7 +9,7 @@ public class blood : MonoBehaviour {
     // Use this for initialization
     void Start () {
         life = 100;
-        float scl = Random.Range(0.06f, 0.8f);
+        float scl = Random.Range(0.06f, 0.5f);
         transform.localScale = new Vector3(scl, scl, 1);
 
     }

@@ -21,6 +21,12 @@ public class enemyHealthBar : MonoBehaviour {
             transform.localScale = new Vector3((4.88f - (100 - GameObject.Find("bear03").GetComponent<bear>().health) / 18f), transform.localScale.y, transform.localScale.z);
         }
 
+        if (GameObject.Find("shark01") == null && GameObject.Find("bear03") == null)
+        {
+            transform.localScale = new Vector3((4.88f - (100 - GameObject.Find("crab012").GetComponent<bear>().health) / 18f), transform.localScale.y, transform.localScale.z);
+
+         //   transform.localScale = new Vector3(4.88f - (100 - GameObject.Find("crab012").GetComponent<crabscript>().health / 18f), transform.localScale.y, transform.localScale.z);
+        }
 
     }
 }
