@@ -13,7 +13,7 @@ public class playerscript : MonoBehaviour
     public Vector3 shurikenVect;
     public float shurkvel;
     int hit;
-
+    public Vector3 corpse;
 
     // Use this for initialization
     void Start()
@@ -36,6 +36,23 @@ public class playerscript : MonoBehaviour
         }
       //  Debug.Log(hit);
 
+
+        if (health == 0)
+        {
+            corpse = transform.position;
+            health -= 1;
+            return;
+        }
+
+        if (health <= 0)
+        {
+            transform.position = corpse;
+            GameObject.Find("DeathMessage").GetComponent<MeshRenderer>().enabled = true;
+            if (Input.GetKey(KeyCode.R))
+            {
+                Application.LoadLevel(0);
+            }
+        }
 
        
 
