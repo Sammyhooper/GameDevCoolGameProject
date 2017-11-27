@@ -5,7 +5,7 @@ using UnityEngine;
 public class shark : MonoBehaviour {
 
     public states state;
-    public bool moving;
+  //  public bool moving;
     public int health;
     float recharge;
     public bool attackingPlayer;
@@ -24,13 +24,31 @@ public class shark : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
         // Debug.Log(moving);
+        if (transform.position.x > 15)
+        {
+            transform.position = new Vector3(Random.Range(5,15), Random.Range(0, 10), transform.position.z);
+        }
+        if (transform.position.x < -15)
+        {
+            transform.position = new Vector3(Random.Range(-15,-5), Random.Range(0, 10), transform.position.z);
+        }
+        if (transform.position.y > 10)
+        {
+            transform.position = new Vector3(Random.Range(0, 10), Random.Range(0,10), transform.position.z);
+        }
+        if (transform.position.y < -10)
+        {
+            transform.position = new Vector3(Random.Range(0, -10), Random.Range(0,-10), transform.position.z);
+        }
+
+        transform.position += new Vector3(Mathf.Sin(Time.deltaTime)*8,0,0);
 
         Instantiate(water, new Vector3(transform.position.x, transform.position.y, 0), Quaternion.identity);
-        if (moving == true)
-        {
-            transform.position = Vector3.Slerp(transform.position, GameObject.Find("Player").GetComponent<Transform>().position, .1f);
-            transform.position = new Vector3(transform.position.x, transform.position.y, 0);
-        }
+    //    if (moving == true)
+   //     {
+         transform.position = Vector3.Slerp(transform.position, GameObject.Find("Player").GetComponent<Transform>().position, .1f);
+       //     transform.position = new Vector3(transform.position.x, transform.position.y, 0);
+   //     }
 
         if (health <= 0)
         {
@@ -52,10 +70,10 @@ public class shark : MonoBehaviour {
             SetState(states.shark01);
 
         }
-        if (Vector3.Distance(transform.position, GameObject.Find("Player").GetComponent<Transform>().position) < .2f)
+        if (Vector3.Distance(transform.position, GameObject.Find("Player").GetComponent<Transform>().position) < 1f)
         {
             transform.position -= Vector3.Slerp(transform.position, GameObject.Find("Player").GetComponent<Transform>().position, Random.Range(.01f, .07f));
-
+            print("touching");
         }
 
 
@@ -75,11 +93,7 @@ public class shark : MonoBehaviour {
             recharge = Random.Range(10,50);
            // transform.position+=new Vector3(-.1f,-.1f,0);
             Instantiate(blood,new Vector3(transform.position.x + .01f, transform.position.y, 0), Quaternion.identity);
-            if (recharge >= 30)
-            {
-                Instantiate(firebreath, transform.position, Quaternion.identity);
-                
-            }
+         
           //  transform.position -= new Vector3(Random.Range(-.1f, .1f), Random.Range(-.1f, .1f), 0);
         }
 
